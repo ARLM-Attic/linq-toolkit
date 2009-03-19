@@ -1,39 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace LinqToolkit {
-    /// <summary>
-    /// Defines an interface for query options.
-    /// </summary>
-    public interface IQueryOptions {
-        /// <summary>
-        /// Filter based on query Where operation.
-        /// </summary>
-        IBaseOperation Filter { get; set; }
-        /// <summary>
-        /// Property names to read from data source.
-        /// </summary>
-        HashSet<string> PropertiesToRead { get; }
-    }
-    /// <summary>
-    /// Defines an interface for operation.
-    /// </summary>
-    public interface IBaseOperation { }
-    /// <summary>
-    /// Defines an interface for join operation.
-    /// </summary>
-    public interface IJoinOperation: IBaseOperation {
-        /// <summary>
-        /// Left operand to join
-        /// </summary>
-        IBaseOperation Left { get; }
-        /// <summary>
-        /// Right operand to join
-        /// </summary>
-        IBaseOperation Right { get; }
-    }
     /// <summary>
     /// Defines an interface for query context.
     /// </summary>
