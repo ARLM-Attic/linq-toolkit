@@ -57,11 +57,24 @@
     <Compile Include="IQueryContext.cs" />
     <Compile Include="IQueryOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Query.BuildOperator.cs" />
     <Compile Include="Query.BuildOperatorSelect.cs" />
     <Compile Include="Query.BuildOperatorWhere.cs" />
     <Compile Include="Query.cs" />
     <Compile Include="SourcePropertyAttribute.cs" />
+    <Compile Include="Table.cs" />
+    <Compile Include="UpdatedTableItem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

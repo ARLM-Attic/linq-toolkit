@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace LinqToolkit {
 
-    public partial class Query<TContext, TEntity> {
+    public partial class Query<TContext, TItem> {
 
         private bool BuildOperator( MethodCallExpression call ) {
             switch ( call.Arguments.Count ) {

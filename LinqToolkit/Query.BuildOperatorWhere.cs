@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using LinqToolkit.Properties;
 
 namespace LinqToolkit {
 
-    public partial class Query<TContext, TEntity> {
+    public partial class Query<TContext, TItem> {
         private bool BuildOperatorWhere( LambdaExpression expression, string methodName ) {
             if ( methodName!="Where" ) {
                 return false;
@@ -26,7 +27,12 @@ namespace LinqToolkit {
             if ( result!=null ) {
                 return result;
             }
-            throw new NotSupportedException( "Unsupported query expression detected: " + expression.ToString() );
+            throw new NotSupportedException(
+                string.Format(
+                    Resources.ParseQueryNotSupportedFormat,
+                    expression.ToString()
+                    )
+                );
         }
         private IBaseOperation ParseBinaryExpression( Expression expression ) {
             BinaryExpression typedExpression = expression as BinaryExpression;
@@ -58,7 +64,13 @@ namespace LinqToolkit {
                         Expression.Lambda( expression.Right ).Compile().DynamicInvoke()
                         );
             }
-            throw new NotSupportedException( "A filtering expression should contain an entity member as the left operand: " + expression.ToString() );
+            throw
+                new NotSupportedException(
+                    string.Format(
+                        Resources.ParseConditionExpressionNotSupportedFormat,
+                        expression.ToString()
+                        )
+                    );
         }
         private IBaseOperation ParseUnaryExpression( Expression expression ) {
             UnaryExpression typedExpression = expression as UnaryExpression;
