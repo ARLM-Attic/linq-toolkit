@@ -115,6 +115,15 @@ namespace LinqToolkit.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An unary expression should contain an entity member as the operand: {0}.
+        /// </summary>
+        internal static string ParseUnaryExpressionNotSupportedFormat {
+            get {
+                return ResourceManager.GetString("ParseUnaryExpressionNotSupportedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This item is not found..
         /// </summary>
         internal static string TableDeleteItemNotFound {

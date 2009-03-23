@@ -127,18 +127,12 @@ namespace LinqToolkit {
         }
         #endregion
         #region Attributes support
-        protected string GetFilterPropertyName( MemberInfo member ) {
-            return this.GetPropertyName<FilterPropertyAttribute>( member, true );
-        }
         protected string GetSourcePropertyName( MemberInfo member ) {
-            return this.GetPropertyName<SourcePropertyAttribute>( member, true );
+            return this.GetSourcePropertyName( member, true );
         }
         protected string GetSourcePropertyName( MemberInfo member, bool throwOnError ) {
-            return this.GetPropertyName<SourcePropertyAttribute>( member, throwOnError );
-        }
-        private string GetPropertyName<TAttribute>( MemberInfo member, bool throwOnError )
-            where TAttribute: Attribute, IPropertyName {
             if ( !member.DeclaringType.IsAssignableFrom( this.originalType ) ) {
+                if ( !throwOnError ) { return null; }
                 throw
                     new InvalidOperationException(
                         string.Format(
@@ -151,16 +145,21 @@ namespace LinqToolkit {
             object[] customAttributes = member.GetCustomAttributes( false );
 
             if ( customAttributes.OfType<IgnoreAttribute>().Any() ) {
+                if ( !throwOnError ) { return null; }
                 throw
                     new InvalidOperationException(
                         string.Format(
-                            Properties.Resources.GetPropertyNameIgnoreAttributeFormat,
+                            Resources.GetPropertyNameIgnoreAttributeFormat,
                             member.Name
                             )
                         );
             }
 
-            IPropertyName sourceProperty = customAttributes.OfType<TAttribute>().FirstOrDefault();
+            SourcePropertyAttribute sourceProperty =
+                customAttributes
+                .OfType<SourcePropertyAttribute>()
+                .FirstOrDefault();
+
             return
                 sourceProperty!=null
                 ? sourceProperty.Name

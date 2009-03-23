@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRunConfiguration name="LinqToolkit" id="7d434e61-1427-4531-b2de-d65403583c59" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <Description>This is a default test run configuration for a local test run.</Description>
+  <CodeCoverage enabled="true">
+    <Regular>
+      <CodeCoverageItem binaryFile="LinqToolkit\bin\Release\LinqToolkit.dll" pdbFile="LinqToolkit\bin\Release\LinqToolkit.pdb" instrumentInPlace="true" />
+    </Regular>
+  </CodeCoverage>
+  <TestTypeSpecific />
+</TestRunConfiguration>

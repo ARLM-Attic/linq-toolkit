@@ -1,17 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3FA50B2E-E8A6-469D-BC35-56B821EFA9E0}</ProjectGuid>
+    <ProjectGuid>{A0731C05-2BEC-4EC7-AEB9-5B5A1BD7F532}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LinqToolkit</RootNamespace>
-    <AssemblyName>LinqToolkit</AssemblyName>
+    <RootNamespace>LinqToolkit.Test</RootNamespace>
+    <AssemblyName>LinqToolkit.Test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -33,48 +33,45 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBaseOperation.cs" />
-    <Compile Include="IgnoreAttribute.cs" />
-    <Compile Include="IJoinOperation.cs" />
-    <Compile Include="IQueryContext.cs" />
-    <Compile Include="IQueryOptions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
+    <Compile Include="ITestItem.cs" />
+    <Compile Include="ITestQuery.cs">
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Query.BuildOperator.cs" />
-    <Compile Include="Query.BuildOperatorSelect.cs" />
-    <Compile Include="Query.BuildOperatorWhere.cs" />
-    <Compile Include="Query.cs" />
-    <Compile Include="SourcePropertyAttribute.cs" />
-    <Compile Include="Table.cs" />
-    <Compile Include="UpdatedTableItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryTests.cs" />
+    <Compile Include="TestBinaryOperation.cs" />
+    <Compile Include="TestContext.cs" />
+    <Compile Include="TestItem.cs" />
+    <Compile Include="TestItemNew.cs" />
+    <Compile Include="TestJoinOperation.cs" />
+    <Compile Include="TestMethodCallOperation.cs" />
+    <Compile Include="TestOperator.cs" />
+    <Compile Include="TestOptions.cs" />
+    <Compile Include="TestQuery.cs" />
+    <Compile Include="TestUnaryOperation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Content Include="AuthoringTests.txt" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\LinqToolkit\LinqToolkit.csproj">
+      <Project>{3FA50B2E-E8A6-469D-BC35-56B821EFA9E0}</Project>
+      <Name>LinqToolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

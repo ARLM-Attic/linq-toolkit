@@ -48,7 +48,7 @@ namespace LinqToolkit {
             if ( argument==null ) {
                 return false;
             }
-            string propertyName = this.GetFilterPropertyName( argument.Member );
+            string propertyName = this.GetSourcePropertyName( argument.Member );
             return this.Context.BuildOperator( methodName, propertyName );
         }
     }

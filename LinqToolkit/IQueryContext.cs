@@ -21,7 +21,7 @@ namespace LinqToolkit {
         /// <param name="type">Type of operation to create</param>
         /// <param name="left">Operand for unary operation</param>
         /// <returns>Created unary operation</returns>
-        IBaseOperation CreateUnaryOperation( ExpressionType type, IBaseOperation operand );
+        IBaseOperation CreateUnaryOperation( ExpressionType type, string propertyName );
         /// <summary>Creates binary operation.</summary>
         /// <param name="type">Type of operation to create</param>
         /// <param name="propertyName">Left operand property name</param>
@@ -33,7 +33,7 @@ namespace LinqToolkit {
         /// <param name="propertyName">Property name where method is defined</param>
         /// <param name="arguments">Arguments for method call</param>
         /// <returns>Created method call operation</returns>
-        IBaseOperation CreateCallOperation( MethodInfo method, string propertyName, object[] arguments );
+        IBaseOperation CreateMethodCallOperation( MethodInfo method, string propertyName, object[] arguments );
         /// <summary>Builds an operator without parameters</summary>
         /// <param name="operatorName">Operator name to create</param>
         /// <returns>True if operator created, otherwise False</returns>

@@ -3,15 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToolkit", "LinqToolkit\LinqToolkit.csproj", "{3FA50B2E-E8A6-469D-BC35-56B821EFA9E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToolkit.Test", "LinqToolkit.Test\LinqToolkit.Test.csproj", "{A0731C05-2BEC-4EC7-AEB9-5B5A1BD7F532}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C743964-0CF5-49B0-BEFE-0BD305108760}"
+	ProjectSection(SolutionItems) = preProject
+		LinqToolkit.testrunconfig = LinqToolkit.testrunconfig
+		LinqToolkit.vsmdi = LinqToolkit.vsmdi
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs10.codeplex.com/
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = LinqToolkit\\LinqToolkit.csproj
 		SccProjectName1 = LinqToolkit
 		SccLocalPath1 = LinqToolkit
+		SccProjectUniqueName2 = LinqToolkit.Test\\LinqToolkit.Test.csproj
+		SccProjectName2 = LinqToolkit.Test
+		SccLocalPath2 = LinqToolkit.Test
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = LinqToolkit.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +36,10 @@ Global
 		{3FA50B2E-E8A6-469D-BC35-56B821EFA9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FA50B2E-E8A6-469D-BC35-56B821EFA9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FA50B2E-E8A6-469D-BC35-56B821EFA9E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0731C05-2BEC-4EC7-AEB9-5B5A1BD7F532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0731C05-2BEC-4EC7-AEB9-5B5A1BD7F532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0731C05-2BEC-4EC7-AEB9-5B5A1BD7F532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0731C05-2BEC-4EC7-AEB9-5B5A1BD7F532}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

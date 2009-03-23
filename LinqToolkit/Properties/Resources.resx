@@ -150,4 +150,7 @@
   <data name="GetPropertyNameIgnoreAttributeFormat" xml:space="preserve">
     <value>Property marked with IgnoreAttribute: {0}</value>
   </data>
+  <data name="ParseUnaryExpressionNotSupportedFormat" xml:space="preserve">
+    <value>An unary expression should contain an entity member as the operand: {0}</value>
+  </data>
 </root>

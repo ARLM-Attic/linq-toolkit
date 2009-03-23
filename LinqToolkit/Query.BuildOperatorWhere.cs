@@ -56,7 +56,7 @@ namespace LinqToolkit {
         private IBaseOperation ParseConditionExpression( BinaryExpression expression ) {
             var leftExpression = expression.Left as MemberExpression;
             if ( leftExpression!=null ) {
-                string propertyName = this.GetFilterPropertyName( leftExpression.Member );
+                string propertyName = this.GetSourcePropertyName( leftExpression.Member );
                 return
                     this.Context.CreateBinaryOperation(
                         expression.NodeType,
@@ -77,10 +77,21 @@ namespace LinqToolkit {
             if ( typedExpression==null ) {
                 return null;
             }
+            var operandExpression = typedExpression.Operand as MemberExpression;
+            if ( operandExpression==null ) {
+                throw
+                    new NotSupportedException(
+                        string.Format(
+                            Resources.ParseUnaryExpressionNotSupportedFormat,
+                            expression.ToString()
+                            )
+                        );
+            }
+            string propertyName = this.GetSourcePropertyName( operandExpression.Member );
             return
                 this.Context.CreateUnaryOperation(
                     typedExpression.NodeType,
-                    this.ParseQuery( typedExpression.Operand )
+                    propertyName
                     );
         }
         private IBaseOperation ParseMethodCallExpression( Expression expression ) {
@@ -101,9 +112,9 @@ namespace LinqToolkit {
                 .Select( argument => argument.Value )
                 .ToArray();
             return
-                this.Context.CreateCallOperation(
+                this.Context.CreateMethodCallOperation(
                     typedExpression.Method,
-                    this.GetFilterPropertyName( memberExpression.Member ),
+                    this.GetSourcePropertyName( memberExpression.Member ),
                     arguments
                     );
         }
