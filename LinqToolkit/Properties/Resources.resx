@@ -153,4 +153,7 @@
   <data name="ParseUnaryExpressionNotSupportedFormat" xml:space="preserve">
     <value>An unary expression should contain an entity member as the operand: {0}</value>
   </data>
+  <data name="TableConstructorItemsArgumentNullException" xml:space="preserve">
+    <value>Argument items is null.</value>
+  </data>
 </root>

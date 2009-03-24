@@ -3,31 +3,28 @@ using System.Linq.Expressions;
 using System.Reflection;
 
 namespace LinqToolkit.Test {
-    public class TestContext: TestContextBase {
+    public class TestContextEmpty: TestContextBase {
 
         public override IJoinOperation CreateJoinOperation( ExpressionType type, IBaseOperation left, IBaseOperation right ) {
-            return new TestJoinOperation( type, left, right );
+            return null;
         }
         public override IBaseOperation CreateUnaryOperation( ExpressionType type, string propertyName ) {
-            return new TestUnaryOperation( type, propertyName );
+            return null;
         }
         public override IBaseOperation CreateBinaryOperation( ExpressionType type, string propertyName, object value ) {
-            return new TestBinaryOperation( type, propertyName, value );
+            return null;
         }
         public override IBaseOperation CreateMethodCallOperation( MethodInfo method, string propertyName, object[] arguments ) {
-            return new TestMethodCallOperation( method, propertyName, arguments );
+            return null;
         }
         public override bool BuildOperator( string operatorName ) {
-            this.Operator = new TestOperator( operatorName );
-            return true;
+            return false;
         }
         public override bool BuildOperator( string operatorName, string propertyName ) {
-            this.Operator = new TestOperator( operatorName, propertyName );
-            return true;
+            return false;
         }
         public override bool BuildOperator( string operatorName, object value ) {
-            this.Operator = new TestOperator( operatorName, value );
-            return true;
+            return false;
         }
     }
 }

@@ -124,6 +124,15 @@ namespace LinqToolkit.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Argument items is null..
+        /// </summary>
+        internal static string TableConstructorItemsArgumentNullException {
+            get {
+                return ResourceManager.GetString("TableConstructorItemsArgumentNullException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This item is not found..
         /// </summary>
         internal static string TableDeleteItemNotFound {

@@ -56,7 +56,7 @@ namespace LinqToolkit {
             //
             if ( expression.NodeType==ExpressionType.MemberAccess ) {
                 MemberExpression memberExpression = (MemberExpression)expression;
-                string propertyName = this.GetSourcePropertyName( memberExpression.Member );
+                string propertyName = this.GetSourcePropertyName( memberExpression );
                 this.Context.Options.PropertiesToRead.Add( propertyName );
             }
             else {

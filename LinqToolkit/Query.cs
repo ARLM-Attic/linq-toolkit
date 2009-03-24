@@ -127,8 +127,17 @@ namespace LinqToolkit {
         }
         #endregion
         #region Attributes support
-        protected string GetSourcePropertyName( MemberInfo member ) {
-            return this.GetSourcePropertyName( member, true );
+        protected string GetSourcePropertyName( MemberExpression expression ) {
+            if ( !( expression.Expression is ParameterExpression ) ) {
+                throw
+                    new NotSupportedException(
+                        string.Format(
+                            "Accepted only entity members: {0}",
+                            expression.ToString()
+                            )
+                        );
+            }
+            return this.GetSourcePropertyName( expression.Member, true );
         }
         protected string GetSourcePropertyName( MemberInfo member, bool throwOnError ) {
             if ( !member.DeclaringType.IsAssignableFrom( this.originalType ) ) {

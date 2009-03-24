@@ -41,6 +41,12 @@ namespace LinqToolkit {
             itemProperties = typeof( TItem ).GetProperties();
         }
         public Table( IEnumerable<TItem> items ) {
+            if ( items == null ) {
+                throw new ArgumentNullException(
+                    "items",
+                    Resources.TableConstructorItemsArgumentNullException
+                    );
+            }
             this.items = items.ToList();
             this.inserted = new HashSet<TItem>();
             this.deleted = new HashSet<TItem>();

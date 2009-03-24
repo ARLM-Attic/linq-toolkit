@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace LinqToolkit.Test {
 
-    public class TestQuery<TItem>: Query<TestContext, TItem>, ITestQuery {
+    public class TestQuery<TItem>: Query<TestContextBase, TItem>, ITestQuery {
 
-        TestContext ITestQuery.Context { get { return base.Context; } }
+        TestContextBase ITestQuery.Context { get { return base.Context; } }
 
-        public TestQuery() : base( new TestContext() ) { }
+        public TestQuery( TestContextBase context ) : base( context ) { }
 
-        protected override Query<TestContext, T> Copy<T>() {
-            return new TestQuery<T>();
+        protected override Query<TestContextBase, T> Copy<T>() {
+            return new TestQuery<T>( this.Context );
         }
         protected override IEnumerable<object> ExecuteRequest() {
-            throw new NotImplementedException();
+            return new[] { new TestItem() };
         }
     }
 }

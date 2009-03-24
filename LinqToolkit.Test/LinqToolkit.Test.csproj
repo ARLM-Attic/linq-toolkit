@@ -45,14 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Queryable.cs" />
+    <Compile Include="ITestContext.cs" />
     <Compile Include="ITestItem.cs" />
     <Compile Include="ITestQuery.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryTests.cs" />
+    <Compile Include="TableTests.cs" />
     <Compile Include="TestBinaryOperation.cs" />
     <Compile Include="TestContext.cs" />
+    <Compile Include="TestContextBase.cs" />
+    <Compile Include="TestContextEmpty.cs" />
     <Compile Include="TestItem.cs" />
     <Compile Include="TestItemNew.cs" />
     <Compile Include="TestJoinOperation.cs" />
@@ -60,6 +65,7 @@
     <Compile Include="TestOperator.cs" />
     <Compile Include="TestOptions.cs" />
     <Compile Include="TestQuery.cs" />
+    <Compile Include="TestTable.cs" />
     <Compile Include="TestUnaryOperation.cs" />
   </ItemGroup>
   <ItemGroup>

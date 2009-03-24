@@ -56,7 +56,7 @@ namespace LinqToolkit {
         private IBaseOperation ParseConditionExpression( BinaryExpression expression ) {
             var leftExpression = expression.Left as MemberExpression;
             if ( leftExpression!=null ) {
-                string propertyName = this.GetSourcePropertyName( leftExpression.Member );
+                string propertyName = this.GetSourcePropertyName( leftExpression );
                 return
                     this.Context.CreateBinaryOperation(
                         expression.NodeType,
@@ -87,7 +87,7 @@ namespace LinqToolkit {
                             )
                         );
             }
-            string propertyName = this.GetSourcePropertyName( operandExpression.Member );
+            string propertyName = this.GetSourcePropertyName( operandExpression );
             return
                 this.Context.CreateUnaryOperation(
                     typedExpression.NodeType,
@@ -114,7 +114,7 @@ namespace LinqToolkit {
             return
                 this.Context.CreateMethodCallOperation(
                     typedExpression.Method,
-                    this.GetSourcePropertyName( memberExpression.Member ),
+                    this.GetSourcePropertyName( memberExpression ),
                     arguments
                     );
         }
