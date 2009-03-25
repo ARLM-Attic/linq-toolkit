@@ -79,6 +79,24 @@ namespace LinqToolkit.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arguments not supported: {0}.
+        /// </summary>
+        internal static string ExecuteArgumentsNotSupportedFormat {
+            get {
+                return ResourceManager.GetString("ExecuteArgumentsNotSupportedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expected MethodCallExpression: {0}.
+        /// </summary>
+        internal static string ExecuteInvalidOperationFormat {
+            get {
+                return ResourceManager.GetString("ExecuteInvalidOperationFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Property marked with IgnoreAttribute: {0}.
         /// </summary>
         internal static string GetPropertyNameIgnoreAttributeFormat {

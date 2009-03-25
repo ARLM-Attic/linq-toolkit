@@ -156,4 +156,10 @@
   <data name="TableConstructorItemsArgumentNullException" xml:space="preserve">
     <value>Argument items is null.</value>
   </data>
+  <data name="ExecuteInvalidOperationFormat" xml:space="preserve">
+    <value>Expected MethodCallExpression: {0}</value>
+  </data>
+  <data name="ExecuteArgumentsNotSupportedFormat" xml:space="preserve">
+    <value>Arguments not supported: {0}</value>
+  </data>
 </root>

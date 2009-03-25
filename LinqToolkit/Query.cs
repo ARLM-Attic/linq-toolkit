@@ -18,9 +18,17 @@ namespace LinqToolkit {
     /// <typeparam name="TItem">Expected entity type in the underlying source.</typeparam>
     public abstract partial class Query<TContext, TItem>: IOrderedQueryable<TItem>, IQueryProvider
         where TContext: IQueryContext {
+        #region static fields
+        private static Type ItemType;
+        #endregion static fields
+        #region static constructor
+        static Query() {
+            ItemType = typeof( TItem );
+        }
+        #endregion static constructor
         #region private fields
         private Delegate project;
-        private Type originalType = typeof( TItem );
+        private Type originalType;
         #endregion private fields
         #region protected properties
         /// <summary>
@@ -34,6 +42,7 @@ namespace LinqToolkit {
         /// </summary>
         /// <param name="context">An object which implements <see cref="IQueryContext"/> interface.</param>
         public Query( TContext context ) {
+            originalType = ItemType;
             this.Context = context;
         }
         #endregion constructors
@@ -48,11 +57,12 @@ namespace LinqToolkit {
         /// Executes request to specific provider.
         /// </summary>
         /// <returns>Result of the request to specific provider.</returns>
-        protected abstract IEnumerable<object> ExecuteRequest();
+        protected abstract IEnumerable<object> EnumerateQuery();
+        protected abstract TResult ExecuteQuery<TResult>( string commandName );
         #endregion Abstract methods
         #region IQueryable Members
         public Type ElementType {
-            get { return typeof( TItem ); }
+            get { return ItemType; }
         }
         public Expression Expression {
             get { return Expression.Constant( this ); }
@@ -62,10 +72,10 @@ namespace LinqToolkit {
         }
         #endregion
         #region IQueryProvider Members
-        public IQueryable CreateQuery( Expression expression ) {
-            return CreateQuery<TItem>( expression );
+        IQueryable IQueryProvider.CreateQuery( Expression expression ) {
+            return ((IQueryProvider)this).CreateQuery<TItem>( expression );
         }
-        public IQueryable<T> CreateQuery<T>( Expression expression ) {
+        IQueryable<T> IQueryProvider.CreateQuery<T>( Expression expression ) {
 
             MethodCallExpression call = expression as MethodCallExpression;
             if ( call==null ) {
@@ -92,11 +102,30 @@ namespace LinqToolkit {
 
             return result;
         }
-        public object Execute( Expression expression ) {
-            throw new NotImplementedException();
+        object IQueryProvider.Execute( Expression expression ) {
+            return ((IQueryProvider)this).Execute<object>( expression );
         }
-        public TResult Execute<TResult>( Expression expression ) {
-            throw new NotImplementedException();
+        TResult IQueryProvider.Execute<TResult>( Expression expression ) {
+            MethodCallExpression call = expression as MethodCallExpression;
+            if ( call==null ) {
+                throw
+                    new InvalidOperationException(
+                        string.Format(
+                            Resources.ExecuteInvalidOperationFormat,
+                            expression.ToString()
+                            )
+                        );
+            }
+            if (call.Arguments.Count>1) {
+                throw
+                    new NotSupportedException(
+                        string.Format(
+                            Resources.ExecuteArgumentsNotSupportedFormat,
+                            expression.ToString()
+                            )
+                        );
+            }
+            return this.ExecuteQuery<TResult>( call.Method.Name );
         }
         private static Query<TContext, T> Copy<T>( Query<TContext, TItem> source ) {
             Query<TContext, T> result = source.Copy<T>();
@@ -108,14 +137,14 @@ namespace LinqToolkit {
         #endregion
         #region Enumeration support
         IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
         public IEnumerator<TItem> GetEnumerator() {
             return this.GetResults().GetEnumerator();
         }
         private IEnumerable<TItem> GetResults() {
 
-            IEnumerable<object> results = this.ExecuteRequest();
+            IEnumerable<object> results = this.EnumerateQuery();
 
             if ( project==null ) {
                 return results.Cast<TItem>();

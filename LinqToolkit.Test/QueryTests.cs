@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace LinqToolkit.Test {
 
@@ -282,7 +283,8 @@ namespace LinqToolkit.Test {
         public void QueryCreateQueryNotSupported() {
 
             ITestQuery testQuery =
-                (ITestQuery)new TestQuery<TestItem>( new TestContextEmpty() )
+                (ITestQuery)
+                ((IQueryProvider)new TestQuery<TestItem>( new TestContextEmpty() ))
                 .CreateQuery<TestItem>( Expression.Constant( 10 ) );
 
         }
@@ -326,13 +328,25 @@ namespace LinqToolkit.Test {
                 ;
         }
         [TestMethod]
-        [ExpectedException( typeof( NotImplementedException ) )]
         public void QueryExecute() {
             var result =
                 (
                 from item in new TestQuery<TestItem>( new TestContext() )
                 select new { Field = item.TestField }
-                ).Count();
+                ).TestExecuteOperator();
+            Assert.AreEqual( "TestExecuteOperator", result );
+        }
+        [TestMethod]
+        [ExpectedException( typeof( InvalidOperationException ) )]
+        public void QueryExecuteInvalidOperationException() {
+            ( (IQueryProvider)new TestQuery<TestItem>( new TestContext() ) ).Execute(
+                Expression.Constant( 0 )
+                );
+        }
+        [TestMethod]
+        [ExpectedException( typeof( NotSupportedException ) )]
+        public void QueryExecuteNotSupportedException() {
+            new TestQuery<TestItem>( new TestContext() ).TestExecuteOperator( 0 );
         }
         [TestMethod]
         public void QueryFindProperties() {

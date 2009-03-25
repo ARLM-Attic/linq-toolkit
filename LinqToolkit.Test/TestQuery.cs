@@ -12,8 +12,11 @@ namespace LinqToolkit.Test {
         protected override Query<TestContextBase, T> Copy<T>() {
             return new TestQuery<T>( this.Context );
         }
-        protected override IEnumerable<object> ExecuteRequest() {
+        protected override IEnumerable<object> EnumerateQuery() {
             return new[] { new TestItem() };
+        }
+        protected override TResult ExecuteQuery<TResult>( string commandName ) {
+            return (TResult)Convert.ChangeType( commandName, typeof( TResult ) );
         }
     }
 }

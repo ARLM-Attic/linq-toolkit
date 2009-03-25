@@ -12,7 +12,7 @@ namespace LinqToolkit {
     public abstract class Table<TItem>: IEnumerable<TItem>
         where TItem: INotifyPropertyChanged {
         #region private static fields
-        private static PropertyInfo[] itemProperties;
+        private static Type ItemType;
         #endregion private static fields
         #region private fields
         private List<TItem> items;
@@ -38,7 +38,7 @@ namespace LinqToolkit {
         #endregion public properties
         #region constructors
         static Table() {
-            itemProperties = typeof( TItem ).GetProperties();
+            ItemType = typeof( TItem );
         }
         public Table( IEnumerable<TItem> items ) {
             if ( items == null ) {
