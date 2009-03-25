@@ -107,7 +107,9 @@ namespace LinqToolkit {
                 }
                 else if ( expression is MethodCallExpression ) {
                     MethodCallExpression mc = expression as MethodCallExpression;
-                    this.FindProperties( mc.Object );
+                    if ( mc.Object!=null ) {
+                        this.FindProperties( mc.Object );
+                    }
                     foreach ( Expression ex in mc.Arguments ) {
                         this.FindProperties( ex );
                     }

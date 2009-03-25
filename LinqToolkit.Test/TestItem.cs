@@ -30,6 +30,8 @@ namespace LinqToolkit.Test {
         [Ignore]
         public string TestPropertyWithIgnore { get; set; }
 
+        public Func<object, object> TestFunc { get { return this.InternalTestFunc; } }
+
         protected void OnPropertyChanged( string propertyName ) {
             if ( this.PropertyChanged!=null ) {
                 this.PropertyChanged(
@@ -37,6 +39,10 @@ namespace LinqToolkit.Test {
                     new PropertyChangedEventArgs( propertyName )
                     );
             }
+        }
+
+        private object InternalTestFunc( object argument ) {
+            return argument;
         }
     }
 }

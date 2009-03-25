@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace LinqToolkit.Test {
 
@@ -43,7 +44,7 @@ namespace LinqToolkit.Test {
             Assert.AreEqual( typeof( TestItem ), testQuery.ElementType );
             Assert.IsInstanceOfType( testQuery.Provider, typeof( TestQuery<TestItem> ) );
             Assert.IsNull( testQuery.Context.Options.Filter );
-            Assert.AreEqual( 3, testQuery.Context.Options.PropertiesToRead.Count );
+            Assert.AreEqual( 4, testQuery.Context.Options.PropertiesToRead.Count );
             Assert.IsTrue( testQuery.Context.Options.PropertiesToRead.Contains( "TestField" ) );
             Assert.IsTrue( testQuery.Context.Options.PropertiesToRead.Contains( "TestPropertySimple" ) );
             Assert.IsTrue( testQuery.Context.Options.PropertiesToRead.Contains( "TestSourceProperty" ) );
@@ -257,14 +258,21 @@ namespace LinqToolkit.Test {
         }
         [TestMethod]
         [ExpectedException( typeof( NotSupportedException ) )]
-        public void QueryBuildOperatorNotSupportedException() {
+        public void QueryBuildOperatorByNameNotSupportedException() {
 
             ITestQuery testQuery = (ITestQuery)new TestQuery<TestItem>( new TestContextEmpty() ).Distinct();
 
         }
         [TestMethod]
         [ExpectedException( typeof( NotSupportedException ) )]
-        public void QueryBuildOperatorManyArgumentsNotSupportedException() {
+        public void QueryBuildOperatorByNameAndPropertyNameNotSupportedException() {
+
+            ITestQuery testQuery = (ITestQuery)new TestQuery<TestItem>( new TestContextEmpty() ).OrderBy( item => 1 );
+
+        }
+        [TestMethod]
+        [ExpectedException( typeof( NotSupportedException ) )]
+        public void QueryBuildOperatorTooManyArgumentsNotSupportedException() {
 
             ITestQuery testQuery = (ITestQuery)new TestQuery<TestItem>( new TestContextEmpty() ).TestOperator( 1, 2 );
 
@@ -325,6 +333,30 @@ namespace LinqToolkit.Test {
                 from item in new TestQuery<TestItem>( new TestContext() )
                 select new { Field = item.TestField }
                 ).Count();
+        }
+        [TestMethod]
+        public void QueryFindProperties() {
+            var testQuery =
+                from item in new TestQuery<TestItem>( new TestContext() )
+                select new {
+                    // BinaryExpression
+                    BinaryExpression = item.TestPropertySimple=="123",
+                    UnaryExpression = !item.TestField,
+                    ConditionalExpression = item.TestField ? item.TestPropertySimple : item.TestPropertySimple,
+                    InvocationExpression = item.TestFunc( item.TestPropertySimple ),
+                    LambdaExpression = item.TestPropertySimple + item.TestPropertySimple + item.TestPropertySimple,
+                    ListInitExpression = new List<string>() { item.TestPropertySimple },
+                    MemberInitExpression = new { Field = item.TestPropertySimple },
+                    MethodCallExpression = this.TestFunc( item.TestPropertySimple ),
+                    NewExpression = new TestItem(),
+                    NewArrayExpression = new[] { item.TestPropertySimple },
+                    TypeBinaryExpression = item is TestItem
+                };
+            foreach ( var item in testQuery )
+                ;
+        }
+        private object TestFunc( object argument ) {
+            return argument;
         }
     }
 }
