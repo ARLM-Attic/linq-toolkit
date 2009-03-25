@@ -339,7 +339,6 @@ namespace LinqToolkit.Test {
             var testQuery =
                 from item in new TestQuery<TestItem>( new TestContext() )
                 select new {
-                    // BinaryExpression
                     BinaryExpression = item.TestPropertySimple=="123",
                     UnaryExpression = !item.TestField,
                     ConditionalExpression = item.TestField ? item.TestPropertySimple : item.TestPropertySimple,
