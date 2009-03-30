@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LinqToolkit.Test {
+namespace LinqToolkit.Test.Query {
 
     public class TestQuery<TItem>: Query<TestContextBase, TItem>, ITestQuery {
 

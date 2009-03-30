@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LinqToolkit.Test {
+namespace LinqToolkit.Test.Query {
     public class TestOperator: IEquatable<TestOperator> {
 
         public readonly string OperatorName;

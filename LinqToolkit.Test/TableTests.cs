@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LinqToolkit.Test {
+    using LinqToolkit.Test.Table;
 
     /// <summary>
     /// Summary description for TableTest

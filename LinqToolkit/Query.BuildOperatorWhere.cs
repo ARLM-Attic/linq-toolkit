@@ -112,7 +112,7 @@ namespace LinqToolkit {
                 .Select( argument => argument.Value )
                 .ToArray();
             return
-                this.Context.CreateMethodCallOperation(
+                this.Context.CreateCallOperation(
                     typedExpression.Method,
                     this.GetSourcePropertyName( memberExpression ),
                     arguments

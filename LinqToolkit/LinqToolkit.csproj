@@ -49,6 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SimpleQuery\SimpleQueryBinaryOperation.cs" />
+    <Compile Include="SimpleQuery\SimpleQueryCallOperation.cs" />
+    <Compile Include="SimpleQuery\SimpleQueryContext.cs" />
+    <Compile Include="SimpleQuery\SimpleQueryJoinOperation.cs" />
+    <Compile Include="SimpleQuery\SimpleQueryOperator.cs" />
+    <Compile Include="SimpleQuery\SimpleQueryOptions.cs" />
+    <Compile Include="SimpleQuery\SimpleQueryUnaryOperation.cs" />
     <Compile Include="IBaseOperation.cs" />
     <Compile Include="IgnoreAttribute.cs" />
     <Compile Include="IJoinOperation.cs" />
@@ -64,6 +71,7 @@
     <Compile Include="Query.BuildOperatorSelect.cs" />
     <Compile Include="Query.BuildOperatorWhere.cs" />
     <Compile Include="Query.cs" />
+    <Compile Include="SimpleQuery\SimpleQueryBaseOperation.cs" />
     <Compile Include="SourcePropertyAttribute.cs" />
     <Compile Include="Table.cs" />
     <Compile Include="UpdatedTableItem.cs" />

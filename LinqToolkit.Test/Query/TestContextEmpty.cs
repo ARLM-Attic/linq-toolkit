@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace LinqToolkit.Test {
+namespace LinqToolkit.Test.Query {
     public class TestContextEmpty: TestContextBase {
 
         public override IJoinOperation CreateJoinOperation( ExpressionType type, IBaseOperation left, IBaseOperation right ) {
@@ -14,7 +14,7 @@ namespace LinqToolkit.Test {
         public override IBaseOperation CreateBinaryOperation( ExpressionType type, string propertyName, object value ) {
             return null;
         }
-        public override IBaseOperation CreateMethodCallOperation( MethodInfo method, string propertyName, object[] arguments ) {
+        public override IBaseOperation CreateCallOperation( MethodInfo method, string propertyName, object[] arguments ) {
             return null;
         }
         public override bool BuildOperator( string operatorName ) {

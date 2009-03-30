@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace LinqToolkit.Test {
+namespace LinqToolkit.Test.Query {
     public static class Queryable {
         public static IQueryable<TSource> TestOperator<TSource>( this IQueryable<TSource> source, int parameter1, int parameter2 ) {
             Expression expression =

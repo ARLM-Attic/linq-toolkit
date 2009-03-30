@@ -33,7 +33,7 @@ namespace LinqToolkit {
         /// <param name="propertyName">Property name where method is defined</param>
         /// <param name="arguments">Arguments for method call</param>
         /// <returns>Created method call operation</returns>
-        IBaseOperation CreateMethodCallOperation( MethodInfo method, string propertyName, object[] arguments );
+        IBaseOperation CreateCallOperation( MethodInfo method, string propertyName, object[] arguments );
         /// <summary>Builds an operator without parameters</summary>
         /// <param name="operatorName">Operator name to create</param>
         /// <returns>True if operator created, otherwise False</returns>

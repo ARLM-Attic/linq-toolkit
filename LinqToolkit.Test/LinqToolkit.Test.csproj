@@ -45,28 +45,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Queryable.cs" />
-    <Compile Include="ITestContext.cs" />
+    <Compile Include="Query\Queryable.cs" />
+    <Compile Include="Query\ITestContext.cs" />
     <Compile Include="ITestItem.cs" />
-    <Compile Include="ITestQuery.cs">
+    <Compile Include="Query\ITestQuery.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryTests.cs" />
+    <Compile Include="SimpleQueryTests.cs" />
+    <Compile Include="SimpleQuery\TestSimpleQuery.cs" />
     <Compile Include="TableTests.cs" />
-    <Compile Include="TestBinaryOperation.cs" />
-    <Compile Include="TestContext.cs" />
-    <Compile Include="TestContextBase.cs" />
-    <Compile Include="TestContextEmpty.cs" />
+    <Compile Include="Query\TestBinaryOperation.cs" />
+    <Compile Include="Query\TestContext.cs" />
+    <Compile Include="Query\TestContextBase.cs" />
+    <Compile Include="Query\TestContextEmpty.cs" />
     <Compile Include="TestItem.cs" />
     <Compile Include="TestItemNew.cs" />
-    <Compile Include="TestJoinOperation.cs" />
-    <Compile Include="TestMethodCallOperation.cs" />
-    <Compile Include="TestOperator.cs" />
-    <Compile Include="TestOptions.cs" />
-    <Compile Include="TestQuery.cs" />
-    <Compile Include="TestTable.cs" />
-    <Compile Include="TestUnaryOperation.cs" />
+    <Compile Include="Query\TestJoinOperation.cs" />
+    <Compile Include="Query\TestCallOperation.cs" />
+    <Compile Include="Query\TestOperator.cs" />
+    <Compile Include="Query\TestOptions.cs" />
+    <Compile Include="Query\TestQuery.cs" />
+    <Compile Include="Table\TestTable.cs" />
+    <Compile Include="Query\TestUnaryOperation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />

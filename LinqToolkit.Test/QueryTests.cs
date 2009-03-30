@@ -1,15 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LinqToolkit.Test {
+    using LinqToolkit.Test.Query;
 
-    /// <summary>
-    /// Summary description for QueryTests
-    /// </summary>
     [TestClass]
     public class QueryTests {
 
@@ -155,7 +153,7 @@ namespace LinqToolkit.Test {
                 select item;
         }
         [TestMethod]
-        public void QueryWhereMethodCallOperation() {
+        public void QueryWhereCallOperation() {
 
             ITestQuery testQuery = (ITestQuery)
                 from item in new TestQuery<TestItem>( new TestContext() )
@@ -163,13 +161,13 @@ namespace LinqToolkit.Test {
                 select item;
 
             Assert.AreEqual(
-                new TestMethodCallOperation( typeof( string ).GetMethod( "Contains" ), "TestPropertySimple", new object[] { "123" } ),
+                new TestCallOperation( typeof( string ).GetMethod( "Contains" ), "TestPropertySimple", new object[] { "123" } ),
                 testQuery.Context.Options.Filter
                 );
         }
         [TestMethod]
         [ExpectedException( typeof( NotSupportedException ) )]
-        public void QueryWhereMethodCallOperationNotSupportedException() {
+        public void QueryWhereCallOperationNotSupportedException() {
 
             ITestQuery testQuery = (ITestQuery)
                 from item in new TestQuery<TestItem>( new TestContextEmpty() )
@@ -179,7 +177,7 @@ namespace LinqToolkit.Test {
         }
         [TestMethod]
         [ExpectedException( typeof( NotSupportedException ) )]
-        public void QueryWhereMethodCallOperationNotEntityNotSupportedException() {
+        public void QueryWhereCallOperationNotEntityNotSupportedException() {
             TestItem dummy = new TestItem();
 
             ITestQuery testQuery = (ITestQuery)
@@ -190,7 +188,7 @@ namespace LinqToolkit.Test {
         }
         [TestMethod]
         [ExpectedException( typeof( NotSupportedException ) )]
-        public void QueryWhereMethodCallOperationNotMemberNotSupportedException() {
+        public void QueryWhereCallOperationNotMemberNotSupportedException() {
 
             ITestQuery testQuery = (ITestQuery)
                 from item in new TestQuery<TestItem>( new TestContextEmpty() )
@@ -200,7 +198,7 @@ namespace LinqToolkit.Test {
         }
         [TestMethod]
         [ExpectedException( typeof( NotSupportedException ) )]
-        public void QueryWhereMethodCallOperationNotConstantNotSupportedException() {
+        public void QueryWhereCallOperationNotConstantNotSupportedException() {
 
             ITestQuery testQuery = (ITestQuery)
                 from item in new TestQuery<TestItem>( new TestContextEmpty() )

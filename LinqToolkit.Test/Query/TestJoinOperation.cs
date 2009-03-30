@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace LinqToolkit.Test {
+namespace LinqToolkit.Test.Query {
 
     public class TestJoinOperation: IJoinOperation, IEquatable<TestJoinOperation> {
 
