@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace LinqToolkit.SimpleQuery {
 
-    public class SimpleQueryCallOperation: SimpleQueryBaseOperation {
+    public class CallOperation: BaseOperation {
 
         [XmlAttribute]
         public string MethodName { get; set; }

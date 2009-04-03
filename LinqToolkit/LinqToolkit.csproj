@@ -49,14 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SimpleQuery\SimpleQueryBinaryOperation.cs" />
-    <Compile Include="SimpleQuery\SimpleQueryCallOperation.cs" />
-    <Compile Include="SimpleQuery\SimpleQueryContext.cs" />
-    <Compile Include="SimpleQuery\SimpleQueryJoinOperation.cs" />
-    <Compile Include="SimpleQuery\SimpleQueryOperator.cs" />
-    <Compile Include="SimpleQuery\SimpleQueryOptions.cs" />
-    <Compile Include="SimpleQuery\SimpleQueryOptionsExtentions.cs" />
-    <Compile Include="SimpleQuery\SimpleQueryUnaryOperation.cs" />
+    <Compile Include="SimpleQuery\BinaryOperation.cs" />
+    <Compile Include="SimpleQuery\CallOperation.cs" />
+    <Compile Include="SimpleQuery\QueryContext.cs" />
+    <Compile Include="SimpleQuery\JoinOperation.cs" />
+    <Compile Include="SimpleQuery\QueryOperator.cs" />
+    <Compile Include="SimpleQuery\QueryOptions.cs" />
+    <Compile Include="SimpleQuery\QueryOptionsExtentions.cs" />
+    <Compile Include="SimpleQuery\UnaryOperation.cs" />
     <Compile Include="IBaseOperation.cs" />
     <Compile Include="IgnoreAttribute.cs" />
     <Compile Include="IJoinOperation.cs" />
@@ -72,7 +72,7 @@
     <Compile Include="Query.BuildOperatorSelect.cs" />
     <Compile Include="Query.BuildOperatorWhere.cs" />
     <Compile Include="Query.cs" />
-    <Compile Include="SimpleQuery\SimpleQueryBaseOperation.cs" />
+    <Compile Include="SimpleQuery\BaseOperation.cs" />
     <Compile Include="SourceAttribute.cs" />
     <Compile Include="SourcePropertyAttribute.cs" />
     <Compile Include="Table.cs" />
@@ -85,7 +85,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SimpleQuery\SimpleQueryOptions.xsd" />
+    <None Include="SimpleQuery\QueryOptions.xsd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Xml.Serialization;
 
 namespace LinqToolkit.SimpleQuery {
 
-    public class SimpleQueryOperator {
+    public class BinaryOperation: BaseOperation {
         [XmlAttribute]
-        public string OperatorName { get; set; }
+        public ExpressionType Type { get; set; }
         [XmlAttribute]
         public string PropertyName { get; set; }
         public object Value { get; set; }

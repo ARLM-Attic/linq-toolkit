@@ -4,16 +4,16 @@ using System.Collections.Generic;
 namespace LinqToolkit.Test.SimpleQuery {
     using LinqToolkit.SimpleQuery;
 
-    public class TestSimpleQuery<TItem>: Query<SimpleQueryContext, TItem> {
+    public class TestSimpleQuery<TItem>: Query<QueryContext, TItem> {
 
-        public SimpleQueryOptions Options {
+        public QueryOptions Options {
             get { return base.Context.Options; }
         }
 
-        public TestSimpleQuery() : base( new SimpleQueryContext() ) { }
-        public TestSimpleQuery( SimpleQueryContext context ) : base( context ) { }
+        public TestSimpleQuery() : base( new QueryContext() ) { }
+        public TestSimpleQuery( QueryContext context ) : base( context ) { }
 
-        protected override Query<SimpleQueryContext, T> Copy<T>() {
+        protected override Query<QueryContext, T> Copy<T>() {
             return new TestSimpleQuery<T>( this.Context );
         }
 

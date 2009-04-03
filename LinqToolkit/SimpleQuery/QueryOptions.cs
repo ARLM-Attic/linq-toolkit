@@ -9,23 +9,23 @@ namespace LinqToolkit.SimpleQuery {
     /// Implements <see cref="IQueryOptions"/> interface and contains concrete query options including operators applied to a query.
     /// </summary>
     [XmlRoot( "Options")]
-    public class SimpleQueryOptions: IQueryOptions {
+    public class QueryOptions: IQueryOptions {
         public string Source { get; set; }
-        public SimpleQueryBaseOperation Filter { get; set; }
+        public BaseOperation Filter { get; set; }
         [XmlArrayItem( "Property" )]
         public HashSet<string> PropertiesToRead { get; set; }
         [XmlArrayItem( "Operator" )]
-        public List<SimpleQueryOperator> Operators { get; set; }
+        public List<QueryOperator> Operators { get; set; }
 
-        public SimpleQueryOptions() {
+        public QueryOptions() {
             this.PropertiesToRead = new HashSet<string>();
-            this.Operators = new List<SimpleQueryOperator>();
+            this.Operators = new List<QueryOperator>();
         }
 
         #region IQueryOptions Members
         IBaseOperation IQueryOptions.Filter {
             get { return this.Filter; }
-            set { this.Filter = (SimpleQueryBaseOperation)value; }
+            set { this.Filter = (BaseOperation)value; }
         }
         #endregion
     }

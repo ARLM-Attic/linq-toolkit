@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Xml.Serialization;
 
 namespace LinqToolkit.SimpleQuery {
 
-    public class SimpleQueryUnaryOperation: SimpleQueryBaseOperation {
-
+    public class QueryOperator {
         [XmlAttribute]
-        public ExpressionType Type { get; set; }
+        public string OperatorName { get; set; }
         [XmlAttribute]
         public string PropertyName { get; set; }
+        public object Value { get; set; }
     }
 }

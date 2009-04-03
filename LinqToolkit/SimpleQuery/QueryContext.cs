@@ -8,12 +8,12 @@ namespace LinqToolkit.SimpleQuery {
     /// Implements <see cref="IQueryContext"/> interface and contains concrete query context.
     /// Contains instance of <see cref="SimpleQueryOptions"/> class.
     /// </summary>
-    public class SimpleQueryContext: IQueryContext {
+    public class QueryContext: IQueryContext {
 
-        public SimpleQueryOptions Options { get; private set; }
+        public QueryOptions Options { get; private set; }
 
-        public SimpleQueryContext() {
-            this.Options =new SimpleQueryOptions();
+        public QueryContext() {
+            this.Options =new QueryOptions();
         }
 
         #region IQueryContext Members
@@ -22,22 +22,22 @@ namespace LinqToolkit.SimpleQuery {
         }
         IJoinOperation IQueryContext.CreateJoinOperation( ExpressionType type, IBaseOperation left, IBaseOperation right ) {
             return
-                new SimpleQueryJoinOperation() {
+                new JoinOperation() {
                     Type = type,
-                    Left = (SimpleQueryBaseOperation)left,
-                    Right = (SimpleQueryBaseOperation)right
+                    Left = (BaseOperation)left,
+                    Right = (BaseOperation)right
                 };
         }
         IBaseOperation IQueryContext.CreateUnaryOperation( ExpressionType type, string propertyName ) {
             return
-                new SimpleQueryUnaryOperation() {
+                new UnaryOperation() {
                     Type = type,
                     PropertyName = propertyName
                 };
         }
         IBaseOperation IQueryContext.CreateBinaryOperation( ExpressionType type, string propertyName, object value ) {
             return
-                new SimpleQueryBinaryOperation() {
+                new BinaryOperation() {
                     Type = type,
                     PropertyName = propertyName,
                     Value = value
@@ -45,7 +45,7 @@ namespace LinqToolkit.SimpleQuery {
         }
         IBaseOperation IQueryContext.CreateCallOperation( MethodInfo method, string propertyName, object[] arguments ) {
             return
-                new SimpleQueryCallOperation() {
+                new CallOperation() {
                     MethodName = method.Name,
                     PropertyName = propertyName,
                     Arguments = arguments 
@@ -53,7 +53,7 @@ namespace LinqToolkit.SimpleQuery {
         }
         bool IQueryContext.BuildOperator( string operatorName ) {
             this.Options.Operators.Add(
-                new SimpleQueryOperator() {
+                new QueryOperator() {
                     OperatorName = operatorName,
                     PropertyName = null,
                     Value = null
@@ -63,7 +63,7 @@ namespace LinqToolkit.SimpleQuery {
         }
         bool IQueryContext.BuildOperator( string operatorName, string propertyName ) {
             this.Options.Operators.Add(
-                new SimpleQueryOperator() {
+                new QueryOperator() {
                     OperatorName = operatorName,
                     PropertyName = propertyName,
                     Value = null
@@ -73,7 +73,7 @@ namespace LinqToolkit.SimpleQuery {
         }
         bool IQueryContext.BuildOperator( string operatorName, object value ) {
             this.Options.Operators.Add(
-                new SimpleQueryOperator() {
+                new QueryOperator() {
                     OperatorName = operatorName,
                     PropertyName = null,
                     Value = value

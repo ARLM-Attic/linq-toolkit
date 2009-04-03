@@ -45,8 +45,8 @@ namespace LinqToolkit.Test {
                 from item in new TestSimpleQuery<TestItem>()
                 where item.TestPropertySimple=="123"
                 select item;
-            Assert.IsInstanceOfType( testQuery.Options.Filter, typeof( SimpleQueryBinaryOperation ) );
-            var result = (SimpleQueryBinaryOperation)testQuery.Options.Filter;
+            Assert.IsInstanceOfType( testQuery.Options.Filter, typeof( BinaryOperation ) );
+            var result = (BinaryOperation)testQuery.Options.Filter;
             Assert.AreEqual( "TestPropertySimple", result.PropertyName );
             Assert.AreEqual( "123", result.Value );
             Assert.AreEqual( ExpressionType.Equal, result.Type );
@@ -57,8 +57,8 @@ namespace LinqToolkit.Test {
                 from item in new TestSimpleQuery<TestItem>()
                 where !( item.TestField )
                 select item;
-            Assert.IsInstanceOfType( testQuery.Options.Filter, typeof( SimpleQueryUnaryOperation ) );
-            var result = (SimpleQueryUnaryOperation)testQuery.Options.Filter;
+            Assert.IsInstanceOfType( testQuery.Options.Filter, typeof( UnaryOperation ) );
+            var result = (UnaryOperation)testQuery.Options.Filter;
             Assert.AreEqual( "TestField", result.PropertyName );
             Assert.AreEqual( ExpressionType.Not, result.Type );
         }
@@ -68,8 +68,8 @@ namespace LinqToolkit.Test {
                 from item in new TestSimpleQuery<TestItem>()
                 where item.TestPropertySimple.Contains( "123" )
                 select item;
-            Assert.IsInstanceOfType( testQuery.Options.Filter, typeof( SimpleQueryCallOperation ) );
-            var result = (SimpleQueryCallOperation)testQuery.Options.Filter;
+            Assert.IsInstanceOfType( testQuery.Options.Filter, typeof( CallOperation ) );
+            var result = (CallOperation)testQuery.Options.Filter;
             Assert.AreEqual( "TestPropertySimple", result.PropertyName );
             Assert.AreEqual( "Contains", result.MethodName );
             Assert.AreEqual( 1, result.Arguments.Length );
@@ -83,10 +83,10 @@ namespace LinqToolkit.Test {
                     item.TestPropertySimple=="123" &&
                     !(item.TestField)
                 select item;
-            var result = (SimpleQueryJoinOperation)testQuery.Options.Filter;
+            var result = (JoinOperation)testQuery.Options.Filter;
             Assert.AreEqual( ExpressionType.AndAlso, result.Type );
-            Assert.IsInstanceOfType( result.Left, typeof(SimpleQueryBinaryOperation) );
-            Assert.IsInstanceOfType( result.Right, typeof( SimpleQueryUnaryOperation ) );
+            Assert.IsInstanceOfType( result.Left, typeof(BinaryOperation) );
+            Assert.IsInstanceOfType( result.Right, typeof( UnaryOperation ) );
         }
         [TestMethod]
         public void SimpleQueryBuildOperatorByName() {

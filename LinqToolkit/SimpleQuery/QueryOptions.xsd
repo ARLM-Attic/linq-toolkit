@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="Options" nillable="true" type="SimpleQueryOptions" />
-  <xs:complexType name="SimpleQueryOptions">
+  <xs:element name="Options" nillable="true" type="QueryOptions" />
+  <xs:complexType name="QueryOptions">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="Source" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="Filter" type="SimpleQueryBaseOperation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Filter" type="BaseOperation" />
       <xs:element minOccurs="0" maxOccurs="1" name="PropertiesToRead" type="ArrayOfString" />
-      <xs:element minOccurs="0" maxOccurs="1" name="Operators" type="ArrayOfSimpleQueryOperator" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Operators" type="ArrayOfQueryOperator" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="SimpleQueryBaseOperation" abstract="true" />
-  <xs:complexType name="SimpleQueryJoinOperation">
+  <xs:complexType name="BaseOperation" abstract="true" />
+  <xs:complexType name="JoinOperation">
     <xs:complexContent mixed="false">
-      <xs:extension base="SimpleQueryBaseOperation">
+      <xs:extension base="BaseOperation">
         <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="1" name="Left" type="SimpleQueryBaseOperation" />
-          <xs:element minOccurs="0" maxOccurs="1" name="Right" type="SimpleQueryBaseOperation" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Left" type="BaseOperation" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Right" type="BaseOperation" />
         </xs:sequence>
         <xs:attribute name="Type" type="ExpressionType" use="required" />
       </xs:extension>
@@ -71,9 +71,9 @@
       <xs:enumeration value="TypeIs" />
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name="SimpleQueryBinaryOperation">
+  <xs:complexType name="BinaryOperation">
     <xs:complexContent mixed="false">
-      <xs:extension base="SimpleQueryBaseOperation">
+      <xs:extension base="BaseOperation">
         <xs:sequence>
           <xs:element minOccurs="0" maxOccurs="1" name="Value" />
         </xs:sequence>
@@ -82,9 +82,9 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="SimpleQueryCallOperation">
+  <xs:complexType name="CallOperation">
     <xs:complexContent mixed="false">
-      <xs:extension base="SimpleQueryBaseOperation">
+      <xs:extension base="BaseOperation">
         <xs:sequence>
           <xs:element minOccurs="0" maxOccurs="1" name="Arguments" type="ArrayOfAnyType" />
         </xs:sequence>
@@ -98,9 +98,9 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Value" nillable="true" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="SimpleQueryUnaryOperation">
+  <xs:complexType name="UnaryOperation">
     <xs:complexContent mixed="false">
-      <xs:extension base="SimpleQueryBaseOperation">
+      <xs:extension base="BaseOperation">
         <xs:attribute name="Type" type="ExpressionType" use="required" />
         <xs:attribute name="PropertyName" type="xs:string" />
       </xs:extension>
@@ -111,12 +111,12 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Property" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="ArrayOfSimpleQueryOperator">
+  <xs:complexType name="ArrayOfQueryOperator">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Operator" nillable="true" type="SimpleQueryOperator" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Operator" nillable="true" type="QueryOperator" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="SimpleQueryOperator">
+  <xs:complexType name="QueryOperator">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="Value" />
     </xs:sequence>

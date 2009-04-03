@@ -58,5 +58,35 @@ namespace LinqToolkit.Test {
                 result
                 );
         }
+        [TestMethod]
+        public void SimpleQueryOptionsApplyFilter() {
+            var testQuery = (TestSimpleQuery<TestItem>)
+                (
+                from item in new TestSimpleQuery<TestItem>()
+                where item.TestPropertySimple=="123" && item.TestPropertySimple.Contains( "123" ) || !item.TestField
+                select new TestItem() {
+                    TestPropertySimple = item.TestPropertySimple,
+                    TestField = item.TestField
+                }
+                );
+            XslCompiledTransform transform = new XslCompiledTransform();
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream( "LinqToolkit.Test.Extensions.Sample.xslt" );
+            transform.Load( XmlReader.Create( stream ) );
+            var source = testQuery.Options.Transform( transform );
+            testQuery = (TestSimpleQuery<TestItem>)
+                (
+                from item in new TestSimpleQuery<TestItem>()
+                select new TestItem() {
+                    TestPropertySimple = item.TestPropertySimple,
+                    TestField = item.TestField
+                }
+                ).Filter( testQuery.Options.Filter );
+            var result = testQuery.Options.Transform( transform );
+            Assert.AreEqual(
+                source,
+                result
+                );
+        }
+
     }
 }

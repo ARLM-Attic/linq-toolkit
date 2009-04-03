@@ -49,10 +49,10 @@ ORDER BY <xsl:value-of select="@PropertyName" /> DESCENDING</xsl:when>
 
   <xsl:template name="AfterWhere"></xsl:template>
 
-  <xsl:template match="node()[@xsi:type='SimpleQueryJoinOperation']" >(<xsl:apply-templates select="./Left"/><xsl:apply-templates select="./@Type" /><xsl:apply-templates select="./Right"/>)</xsl:template>
-  <xsl:template match="node()[@xsi:type='SimpleQueryUnaryOperation']" >(<xsl:apply-templates select="./@Type" /><xsl:value-of select="@PropertyName"/>)</xsl:template>
-  <xsl:template match="node()[@xsi:type='SimpleQueryBinaryOperation']" >(<xsl:value-of select="@PropertyName"/><xsl:apply-templates select="./@Type" /><xsl:apply-templates select="./Value"/>)</xsl:template>
-  <xsl:template match="node()[@xsi:type='SimpleQueryCallOperation']" >(<xsl:value-of select="@PropertyName"/>.<xsl:value-of select="@MethodName"/><xsl:apply-templates select="./Arguments"/>)</xsl:template>
+  <xsl:template match="node()[@xsi:type='JoinOperation']" >(<xsl:apply-templates select="./Left"/><xsl:apply-templates select="./@Type" /><xsl:apply-templates select="./Right"/>)</xsl:template>
+  <xsl:template match="node()[@xsi:type='UnaryOperation']" >(<xsl:apply-templates select="./@Type" /><xsl:value-of select="@PropertyName"/>)</xsl:template>
+  <xsl:template match="node()[@xsi:type='BinaryOperation']" >(<xsl:value-of select="@PropertyName"/><xsl:apply-templates select="./@Type" /><xsl:apply-templates select="./Value"/>)</xsl:template>
+  <xsl:template match="node()[@xsi:type='CallOperation']" >(<xsl:value-of select="@PropertyName"/>.<xsl:value-of select="@MethodName"/><xsl:apply-templates select="./Arguments"/>)</xsl:template>
 
   <xsl:template match="Arguments">(<xsl:for-each select="./Value" >
       <xsl:if test="position()>1">, </xsl:if>
