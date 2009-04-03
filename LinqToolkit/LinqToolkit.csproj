@@ -55,6 +55,7 @@
     <Compile Include="SimpleQuery\SimpleQueryJoinOperation.cs" />
     <Compile Include="SimpleQuery\SimpleQueryOperator.cs" />
     <Compile Include="SimpleQuery\SimpleQueryOptions.cs" />
+    <Compile Include="SimpleQuery\SimpleQueryOptionsExtentions.cs" />
     <Compile Include="SimpleQuery\SimpleQueryUnaryOperation.cs" />
     <Compile Include="IBaseOperation.cs" />
     <Compile Include="IgnoreAttribute.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Query.BuildOperatorWhere.cs" />
     <Compile Include="Query.cs" />
     <Compile Include="SimpleQuery\SimpleQueryBaseOperation.cs" />
+    <Compile Include="SourceAttribute.cs" />
     <Compile Include="SourcePropertyAttribute.cs" />
     <Compile Include="Table.cs" />
     <Compile Include="UpdatedTableItem.cs" />
@@ -81,6 +83,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleQuery\SimpleQueryOptions.xsd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

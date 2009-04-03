@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Options" nillable="true" type="SimpleQueryOptions" />
+  <xs:complexType name="SimpleQueryOptions">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Source" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Filter" type="SimpleQueryBaseOperation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PropertiesToRead" type="ArrayOfString" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Operators" type="ArrayOfSimpleQueryOperator" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SimpleQueryBaseOperation" abstract="true" />
+  <xs:complexType name="SimpleQueryJoinOperation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="SimpleQueryBaseOperation">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Left" type="SimpleQueryBaseOperation" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Right" type="SimpleQueryBaseOperation" />
+        </xs:sequence>
+        <xs:attribute name="Type" type="ExpressionType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ExpressionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Add" />
+      <xs:enumeration value="AddChecked" />
+      <xs:enumeration value="And" />
+      <xs:enumeration value="AndAlso" />
+      <xs:enumeration value="ArrayLength" />
+      <xs:enumeration value="ArrayIndex" />
+      <xs:enumeration value="Call" />
+      <xs:enumeration value="Coalesce" />
+      <xs:enumeration value="Conditional" />
+      <xs:enumeration value="Constant" />
+      <xs:enumeration value="Convert" />
+      <xs:enumeration value="ConvertChecked" />
+      <xs:enumeration value="Divide" />
+      <xs:enumeration value="Equal" />
+      <xs:enumeration value="ExclusiveOr" />
+      <xs:enumeration value="GreaterThan" />
+      <xs:enumeration value="GreaterThanOrEqual" />
+      <xs:enumeration value="Invoke" />
+      <xs:enumeration value="Lambda" />
+      <xs:enumeration value="LeftShift" />
+      <xs:enumeration value="LessThan" />
+      <xs:enumeration value="LessThanOrEqual" />
+      <xs:enumeration value="ListInit" />
+      <xs:enumeration value="MemberAccess" />
+      <xs:enumeration value="MemberInit" />
+      <xs:enumeration value="Modulo" />
+      <xs:enumeration value="Multiply" />
+      <xs:enumeration value="MultiplyChecked" />
+      <xs:enumeration value="Negate" />
+      <xs:enumeration value="UnaryPlus" />
+      <xs:enumeration value="NegateChecked" />
+      <xs:enumeration value="New" />
+      <xs:enumeration value="NewArrayInit" />
+      <xs:enumeration value="NewArrayBounds" />
+      <xs:enumeration value="Not" />
+      <xs:enumeration value="NotEqual" />
+      <xs:enumeration value="Or" />
+      <xs:enumeration value="OrElse" />
+      <xs:enumeration value="Parameter" />
+      <xs:enumeration value="Power" />
+      <xs:enumeration value="Quote" />
+      <xs:enumeration value="RightShift" />
+      <xs:enumeration value="Subtract" />
+      <xs:enumeration value="SubtractChecked" />
+      <xs:enumeration value="TypeAs" />
+      <xs:enumeration value="TypeIs" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SimpleQueryBinaryOperation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="SimpleQueryBaseOperation">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Value" />
+        </xs:sequence>
+        <xs:attribute name="Type" type="ExpressionType" use="required" />
+        <xs:attribute name="PropertyName" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SimpleQueryCallOperation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="SimpleQueryBaseOperation">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Arguments" type="ArrayOfAnyType" />
+        </xs:sequence>
+        <xs:attribute name="MethodName" type="xs:string" />
+        <xs:attribute name="PropertyName" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAnyType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Value" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SimpleQueryUnaryOperation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="SimpleQueryBaseOperation">
+        <xs:attribute name="Type" type="ExpressionType" use="required" />
+        <xs:attribute name="PropertyName" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfString">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Property" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfSimpleQueryOperator">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Operator" nillable="true" type="SimpleQueryOperator" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SimpleQueryOperator">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" />
+    </xs:sequence>
+    <xs:attribute name="OperatorName" type="xs:string" />
+    <xs:attribute name="PropertyName" type="xs:string" />
+  </xs:complexType>
+</xs:schema>

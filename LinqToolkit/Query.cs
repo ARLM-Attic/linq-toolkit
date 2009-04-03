@@ -42,8 +42,19 @@ namespace LinqToolkit {
         /// </summary>
         /// <param name="context">An object which implements <see cref="IQueryContext"/> interface.</param>
         public Query( TContext context ) {
-            originalType = ItemType;
+            this.originalType = ItemType;
             this.Context = context;
+            if ( this.Context.Options.Source==null ) {
+                object[] customAttributes = this.originalType.GetCustomAttributes( false );
+                SourceAttribute source =
+                    customAttributes
+                        .OfType<SourceAttribute>()
+                        .FirstOrDefault();
+                this.Context.Options.Source =
+                    source!=null
+                    ? source.Name
+                    : this.originalType.Name;
+            }
         }
         #endregion constructors
         #region Abstract methods

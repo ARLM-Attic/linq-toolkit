@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace LinqToolkit.SimpleQuery {
 
@@ -7,13 +8,16 @@ namespace LinqToolkit.SimpleQuery {
     /// This class is constructed inside the <see cref="SimpleQueryContext"/> class.
     /// Implements <see cref="IQueryOptions"/> interface and contains concrete query options including operators applied to a query.
     /// </summary>
+    [XmlRoot( "Options")]
     public class SimpleQueryOptions: IQueryOptions {
-
+        public string Source { get; set; }
         public SimpleQueryBaseOperation Filter { get; set; }
-        public HashSet<string> PropertiesToRead { get; private set; }
-        public List<SimpleQueryOperator> Operators { get; private set; }
+        [XmlArrayItem( "Property" )]
+        public HashSet<string> PropertiesToRead { get; set; }
+        [XmlArrayItem( "Operator" )]
+        public List<SimpleQueryOperator> Operators { get; set; }
 
-        internal SimpleQueryOptions() {
+        public SimpleQueryOptions() {
             this.PropertiesToRead = new HashSet<string>();
             this.Operators = new List<SimpleQueryOperator>();
         }

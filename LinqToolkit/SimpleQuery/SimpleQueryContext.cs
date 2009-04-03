@@ -21,27 +21,64 @@ namespace LinqToolkit.SimpleQuery {
             get { return this.Options; }
         }
         IJoinOperation IQueryContext.CreateJoinOperation( ExpressionType type, IBaseOperation left, IBaseOperation right ) {
-            return new SimpleQueryJoinOperation( type, (SimpleQueryBaseOperation)left, (SimpleQueryBaseOperation)right );
+            return
+                new SimpleQueryJoinOperation() {
+                    Type = type,
+                    Left = (SimpleQueryBaseOperation)left,
+                    Right = (SimpleQueryBaseOperation)right
+                };
         }
         IBaseOperation IQueryContext.CreateUnaryOperation( ExpressionType type, string propertyName ) {
-            return new SimpleQueryUnaryOperation( type, propertyName );
+            return
+                new SimpleQueryUnaryOperation() {
+                    Type = type,
+                    PropertyName = propertyName
+                };
         }
         IBaseOperation IQueryContext.CreateBinaryOperation( ExpressionType type, string propertyName, object value ) {
-            return new SimpleQueryBinaryOperation( type, propertyName, value );
+            return
+                new SimpleQueryBinaryOperation() {
+                    Type = type,
+                    PropertyName = propertyName,
+                    Value = value
+                };
         }
         IBaseOperation IQueryContext.CreateCallOperation( MethodInfo method, string propertyName, object[] arguments ) {
-            return new SimpleQueryCallOperation( method, propertyName, arguments );
+            return
+                new SimpleQueryCallOperation() {
+                    MethodName = method.Name,
+                    PropertyName = propertyName,
+                    Arguments = arguments 
+                };
         }
         bool IQueryContext.BuildOperator( string operatorName ) {
-            this.Options.Operators.Add( new SimpleQueryOperator( operatorName ) );
+            this.Options.Operators.Add(
+                new SimpleQueryOperator() {
+                    OperatorName = operatorName,
+                    PropertyName = null,
+                    Value = null
+                }
+                );
             return true;
         }
         bool IQueryContext.BuildOperator( string operatorName, string propertyName ) {
-            this.Options.Operators.Add( new SimpleQueryOperator( operatorName, propertyName ) );
+            this.Options.Operators.Add(
+                new SimpleQueryOperator() {
+                    OperatorName = operatorName,
+                    PropertyName = propertyName,
+                    Value = null
+                }
+                );
             return true;
         }
         bool IQueryContext.BuildOperator( string operatorName, object value ) {
-            this.Options.Operators.Add( new SimpleQueryOperator( operatorName, value ) );
+            this.Options.Operators.Add(
+                new SimpleQueryOperator() {
+                    OperatorName = operatorName,
+                    PropertyName = null,
+                    Value = value
+                }
+                );
             return true;
         }
         #endregion

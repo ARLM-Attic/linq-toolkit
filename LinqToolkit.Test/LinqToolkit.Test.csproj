@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryTests.cs" />
+    <Compile Include="SimpleQueryContextExtensionsTests.cs" />
     <Compile Include="SimpleQueryTests.cs" />
     <Compile Include="SimpleQuery\TestSimpleQuery.cs" />
     <Compile Include="TableTests.cs" />
@@ -72,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
+    <EmbeddedResource Include="Extensions\Sample.xslt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LinqToolkit\LinqToolkit.csproj">

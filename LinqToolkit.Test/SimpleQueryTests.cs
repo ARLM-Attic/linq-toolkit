@@ -33,14 +33,14 @@ namespace LinqToolkit.Test {
         #endregion
 
         [TestMethod]
-        public void QuerySelectSimple() {
+        public void SimpleQuerySelectSimple() {
             var testQuery = (TestSimpleQuery<TestItem>)
                 from item in new TestSimpleQuery<TestItem>()
                 select item;
             Assert.IsFalse( testQuery.Options.Operators.Any() );
         }
         [TestMethod]
-        public void QueryWhereBinaryOperation() {
+        public void SimpleQueryWhereBinaryOperation() {
             var testQuery = (TestSimpleQuery<TestItem>)
                 from item in new TestSimpleQuery<TestItem>()
                 where item.TestPropertySimple=="123"
@@ -52,7 +52,7 @@ namespace LinqToolkit.Test {
             Assert.AreEqual( ExpressionType.Equal, result.Type );
         }
         [TestMethod]
-        public void QueryWhereUnaryOperation() {
+        public void SimpleQueryWhereUnaryOperation() {
             var testQuery = (TestSimpleQuery<TestItem>)
                 from item in new TestSimpleQuery<TestItem>()
                 where !( item.TestField )
@@ -63,7 +63,7 @@ namespace LinqToolkit.Test {
             Assert.AreEqual( ExpressionType.Not, result.Type );
         }
         [TestMethod]
-        public void QueryWhereCallOperation() {
+        public void SimpleQueryWhereCallOperation() {
             var testQuery = (TestSimpleQuery<TestItem>)
                 from item in new TestSimpleQuery<TestItem>()
                 where item.TestPropertySimple.Contains( "123" )
@@ -71,12 +71,12 @@ namespace LinqToolkit.Test {
             Assert.IsInstanceOfType( testQuery.Options.Filter, typeof( SimpleQueryCallOperation ) );
             var result = (SimpleQueryCallOperation)testQuery.Options.Filter;
             Assert.AreEqual( "TestPropertySimple", result.PropertyName );
-            Assert.AreEqual( "Contains", result.Method.Name );
+            Assert.AreEqual( "Contains", result.MethodName );
             Assert.AreEqual( 1, result.Arguments.Length );
             Assert.AreEqual( "123", result.Arguments[0] );
         }
         [TestMethod]
-        public void QueryWhereJoinOperation() {
+        public void SimpleQueryWhereJoinOperation() {
             var testQuery = (TestSimpleQuery<TestItem>)
                 from item in new TestSimpleQuery<TestItem>()
                 where
@@ -89,7 +89,7 @@ namespace LinqToolkit.Test {
             Assert.IsInstanceOfType( result.Right, typeof( SimpleQueryUnaryOperation ) );
         }
         [TestMethod]
-        public void QueryBuildOperatorByName() {
+        public void SimpleQueryBuildOperatorByName() {
             var testQuery = (TestSimpleQuery<TestItem>)
                 new TestSimpleQuery<TestItem>().Distinct();
             Assert.AreEqual( 1, testQuery.Options.Operators.Count );
@@ -99,7 +99,7 @@ namespace LinqToolkit.Test {
             Assert.IsNull( result.Value );
         }
         [TestMethod]
-        public void QueryBuildOperatorByNameAndPropertyName() {
+        public void SimpleQueryBuildOperatorByNameAndPropertyName() {
             var testQuery = (TestSimpleQuery<TestItem>)
                 new TestSimpleQuery<TestItem>().OrderBy( item => item.TestPropertySimple );
             Assert.AreEqual( 1, testQuery.Options.Operators.Count );
@@ -109,7 +109,7 @@ namespace LinqToolkit.Test {
             Assert.IsNull( result.Value );
         }
         [TestMethod]
-        public void QueryBuildOperatorByNameAndValue() {
+        public void SimpleQueryBuildOperatorByNameAndValue() {
             var testQuery = (TestSimpleQuery<TestItem>)
                 new TestSimpleQuery<TestItem>().Take( 10 );
             Assert.AreEqual( 1, testQuery.Options.Operators.Count );

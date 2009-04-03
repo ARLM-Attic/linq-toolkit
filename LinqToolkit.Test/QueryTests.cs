@@ -40,6 +40,7 @@ namespace LinqToolkit.Test {
                 from item in new TestQuery<TestItem>( new TestContext() )
                 select item;
 
+            Assert.AreEqual( "TestItem", testQuery.Context.Options.Source );
             Assert.AreEqual( typeof( TestItem ), testQuery.ElementType );
             Assert.IsInstanceOfType( testQuery.Provider, typeof( TestQuery<TestItem> ) );
             Assert.IsNull( testQuery.Context.Options.Filter );
@@ -62,9 +63,10 @@ namespace LinqToolkit.Test {
         public void QuerySelectNewClass() {
 
             ITestQuery testQuery = (ITestQuery)
-                from item in new TestQuery<TestItem>( new TestContext() )
+                from item in new TestQuery<ITestItem>( new TestContext() )
                 select new TestItemNew( item.TestPropertySimple );
 
+            Assert.AreEqual( "TestItem", testQuery.Context.Options.Source );
             Assert.AreEqual( 1, testQuery.Context.Options.PropertiesToRead.Count );
             Assert.IsTrue( testQuery.Context.Options.PropertiesToRead.Contains( "TestPropertySimple" ) );
         }

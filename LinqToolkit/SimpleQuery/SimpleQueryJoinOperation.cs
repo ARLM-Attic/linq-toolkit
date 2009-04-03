@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Xml.Serialization;
 
 namespace LinqToolkit.SimpleQuery {
 
     public class SimpleQueryJoinOperation: SimpleQueryBaseOperation, IJoinOperation {
 
-        public ExpressionType Type { get; private set; }
-        public SimpleQueryBaseOperation Left { get; private set; }
-        public SimpleQueryBaseOperation Right { get; private set; }
-
-        internal SimpleQueryJoinOperation( ExpressionType type, SimpleQueryBaseOperation left, SimpleQueryBaseOperation right ) {
-            this.Type = type;
-            this.Left = left;
-            this.Right = right;
-        }
+        [XmlAttribute]
+        public ExpressionType Type { get; set; }
+        public SimpleQueryBaseOperation Left { get; set; }
+        public SimpleQueryBaseOperation Right { get; set; }
 
         #region IJoinOperation Members
         IBaseOperation IJoinOperation.Left {
