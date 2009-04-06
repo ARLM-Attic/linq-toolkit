@@ -102,6 +102,19 @@ namespace LinqToolkit.Test {
 
         }
         [TestMethod]
+        public void QueryWhereMemberOperation() {
+
+            ITestQuery testQuery = (ITestQuery)
+                from item in new TestQuery<TestItem>( new TestContext() )
+                where item.TestField
+                select item;
+
+            Assert.AreEqual(
+                new TestUnaryOperation( ExpressionType.MemberAccess, "TestField" ),
+                testQuery.Context.Options.Filter
+                );
+        }
+        [TestMethod]
         public void QueryWhereBinaryOperation() {
 
             ITestQuery testQuery = (ITestQuery)

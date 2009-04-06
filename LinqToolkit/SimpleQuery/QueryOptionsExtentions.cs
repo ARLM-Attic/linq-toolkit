@@ -63,8 +63,12 @@ namespace LinqToolkit.SimpleQuery {
                 );
             return resultWriter.ToString();
         }
-        public static IQueryable<TSource> Filter<TSource>( this IQueryable<TSource> source, BaseOperation operaton ) {
-            return QueryOptionsToQueryable<TSource>.Filter( source, operaton );
+        public static IQueryable<TSource> Where<TSource>( this IQueryable<TSource> source, Expression<Func<TSource, BaseOperation>> predicate ) {
+            return
+                QueryOptionsToQueryable<TSource>.Filter(
+                    source,
+                    Expression.Lambda<Func<BaseOperation>>( predicate.Body ).Compile()()
+                    );
         }
         private static class QueryOptionsToQueryable<TSource> {
 
@@ -151,12 +155,15 @@ namespace LinqToolkit.SimpleQuery {
                 if ( typedOperation==null ) {
                     return null;
                 }
-                Expression operand =
+                Expression expression =
                     Expression.MakeMemberAccess(
                         parameterExpression,
                         sourceType.GetMember( typedOperation.PropertyName ).First()
                         );
-                return Expression.MakeUnary( typedOperation.Type, operand, null );
+                return
+                    typedOperation.Type==ExpressionType.MemberAccess
+                    ? expression
+                    : Expression.MakeUnary( typedOperation.Type, expression, null );
             }
             private static Expression BuildCallOperation( BaseOperation operation ) {
                 var typedOperation = operation as CallOperation;

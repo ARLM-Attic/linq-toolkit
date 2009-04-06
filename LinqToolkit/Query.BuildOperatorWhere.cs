@@ -10,11 +10,23 @@ namespace LinqToolkit {
             if ( methodName!="Where" ) {
                 return false;
             }
-            this.Context.Options.Filter = this.ParseQuery( expression.Body );
+            if ( this.Context.Options.Filter!=null ) {
+                this.Context.Options.Filter =
+                    this.Context.CreateJoinOperation(
+                        ExpressionType.OrElse,
+                        this.Context.Options.Filter,
+                        this.ParseQuery( expression.Body )
+                        );
+            }
+            else {
+                this.Context.Options.Filter =
+                    this.ParseQuery( expression.Body );
+            }
             return true;
         }
         private IBaseOperation ParseQuery( Expression expression ) {
             var handlers = new Func<Expression, IBaseOperation>[] {
+                this.ParseMemberExpression,
                 this.ParseBinaryExpression,
                 this.ParseUnaryExpression,
                 this.ParseMethodCallExpression
@@ -33,6 +45,18 @@ namespace LinqToolkit {
                     expression.ToString()
                     )
                 );
+        }
+        private IBaseOperation ParseMemberExpression( Expression expression ) {
+            MemberExpression typedExpression = expression as MemberExpression;
+            if ( typedExpression==null ) {
+                return null;
+            }
+            string propertyName = this.GetSourcePropertyName( typedExpression );
+            return
+                this.Context.CreateUnaryOperation(
+                    typedExpression.NodeType,
+                    propertyName
+                    );
         }
         private IBaseOperation ParseBinaryExpression( Expression expression ) {
             BinaryExpression typedExpression = expression as BinaryExpression;

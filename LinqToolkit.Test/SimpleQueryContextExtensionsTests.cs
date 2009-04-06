@@ -63,7 +63,7 @@ namespace LinqToolkit.Test {
             var testQuery = (TestSimpleQuery<TestItem>)
                 (
                 from item in new TestSimpleQuery<TestItem>()
-                where item.TestPropertySimple=="123" && item.TestPropertySimple.Contains( "123" ) || !item.TestField
+                where item.TestPropertySimple=="123" && item.TestPropertySimple.Contains( "123" ) || !item.TestField || item.TestField
                 select new TestItem() {
                     TestPropertySimple = item.TestPropertySimple,
                     TestField = item.TestField
@@ -74,13 +74,12 @@ namespace LinqToolkit.Test {
             transform.Load( XmlReader.Create( stream ) );
             var source = testQuery.Options.Transform( transform );
             testQuery = (TestSimpleQuery<TestItem>)
-                (
                 from item in new TestSimpleQuery<TestItem>()
+                where testQuery.Options.Filter
                 select new TestItem() {
                     TestPropertySimple = item.TestPropertySimple,
                     TestField = item.TestField
-                }
-                ).Filter( testQuery.Options.Filter );
+                };
             var result = testQuery.Options.Transform( transform );
             Assert.AreEqual(
                 source,
